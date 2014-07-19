@@ -8,10 +8,6 @@ systemChat ("Heroperks will load in 4min");
 sleep 60;
 systemChat ("Heroperks will load in 3min");
 sleep 60;
-systemChat ("Heroperks will load in 2min");
-sleep 60;
-systemChat ("Heroperks will load in 1min");
-sleep 60;
 _isHero = (player getVariable ["humanity",0] > 5000);
 _isAwesomeHero = ((player getVariable ["humanity",0] > 10000) && (player getVariable ["humanity",0] < 19999));
 _isEpicHero = ((player getVariable ["humanity",0] > 20000) && (player getVariable ["humanity",0] < 29999));
@@ -44,6 +40,10 @@ _cratemags = [_mags,_magss,_maggs] call BIS_fnc_selectRandom;
 _crateweps = [_weapons,_weaponss,_weaponns] call BIS_fnc_selectRandom;
 _cratebp = [_bp,_bpp,_bbp] call BIS_fnc_selectRandom;
 _skinplayer = [_skin,_skinn,_skiin] call BIS_fnc_selectRandom;
+systemChat ("Heroperks will load in 2min");
+sleep 60;
+systemChat ("Heroperks will load in 1min");
+sleep 60;
 
 if (_isHero) then {
 	//_hero = [[2840.74,10159.4,0.002], [3897.95,8757.93,0.001], [13307.1,13091,0.001], [10368.3,9905.98,0.001], [4439.28,8841.53,0.001], [12241.8,11064.6,0.002], [3878.13,10903.7,0.001], [4637.62,6950.64,0.002], [10209.2,9634.9,0.002], [7968.87,11433.7,0.002], [4759.99,12505.6,0.001], [11206.6,12072.5,0.002], [7229.56,7824.12,0.002], [7008.05,7621.04,0.001], [10490,9819.16,0.001], [6136.16,7376.88,0.001], [8298.22,6731.11,0.002], [10915.4,8230.39,0.001], [10607.9,12362,0.002], [6470.61,6305.54,0.002]] call BIS_fnc_selectRandom;

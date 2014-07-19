@@ -44,7 +44,6 @@ diag_log ("LOGIN ATTEMPT: " + str(_playerID) + " " + _playerName);
 //Do Connection Attempt
 _doLoop = 0;
 while {_doLoop < 5} do {
-	//_key = format["CHILD:101:%1:%2:%3:",_playerID,dayZ_instance,_playerName];
 	_key = format["CHILD:101:%1:%2:%3:",_playerID,dayZ_instance,_playerName];
 	_primary = _key call server_hiveReadWrite;
 	if (count _primary > 0) then {

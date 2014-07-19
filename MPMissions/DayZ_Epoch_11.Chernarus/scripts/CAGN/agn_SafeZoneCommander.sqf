@@ -40,6 +40,7 @@ AGN_enteredSafezone = false; //default value
 _inVehicle = objNull;
 _inVehicleLast = objNull;
 _thePlayer = player;
+_playerVehicle = vehicle player;
 
 
 
@@ -71,13 +72,15 @@ while {true} do {
 	};
 	//Cargodmode
 	If ( AGN_safeZone_Vehicle_God) then{
-		fnc_usec_damageVehicle ={};
-		vehicle_handleDamage ={};
-		vehicle_handleKilled ={};
-		_inVehicleLast removeAllEventHandlers "handleDamage";
-		_inVehicleLast addEventHandler ["handleDamage", {false}];
-		_inVehicleLast allowDamage false;
-		if ( AGN_safeZoneMessages ) then { systemChat ("[AGN] Cargod - ON");};
+	    if ((_playerVehicle isKindOf 'LandVehicle') || (_playerVehicle isKindOf 'Air') || (_playerVehicle isKindOf 'Ship')) then{
+			fnc_usec_damageVehicle ={};
+			vehicle_handleDamage ={};
+			vehicle_handleKilled ={};
+			_inVehicleLast removeAllEventHandlers "handleDamage";
+			_inVehicleLast addEventHandler ["handleDamage", {false}];
+			_inVehicleLast allowDamage false;
+			if ( AGN_safeZoneMessages ) then { systemChat ("[AGN] Cargod - ON");};
+		};
 	};
 	//Despawn AI near safe zones
 	if ( AGN_safeZone_antiAI ) then{
@@ -281,28 +284,34 @@ while {true} do {
 	};
 	
 	if ( AGN_safeZoneGodmode ) then{
-	//turn god mode off early just in case!
-		player_zombieCheck = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_zombieCheck.sqf";
-		fnc_usec_damageHandler = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_damageHandler.sqf";
-		_thePlayer addEventHandler ["handleDamage", {true}];
-		_thePlayer removeAllEventHandlers "handleDamage";
-		_thePlayer allowDamage true;
-			//check if anti spam is on
-		if (AGN_safeZoneAntispam )then{
-			//check if player has entered safezone recently
-			if (AGN_enteredSafezone) then{
-				[] execVM "scripts\CAGN\agn_timer.sqf";
+		if(ADMINGODMODE)then{
+			//do nothing		
+		}else{
+			//turn god mode off early just in case!
+			player_zombieCheck = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_zombieCheck.sqf";
+			fnc_usec_damageHandler = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_damageHandler.sqf";
+			_thePlayer addEventHandler ["handleDamage", {true}];
+			_thePlayer removeAllEventHandlers "handleDamage";
+			_thePlayer allowDamage true;
+				//check if anti spam is on
+			if (AGN_safeZoneAntispam )then{
+				//check if player has entered safezone recently
+				if (AGN_enteredSafezone) then{
+					[] execVM "scripts\CAGN\agn_timer.sqf";
+				};
 			};
 		};
 	};
 	If ( AGN_safeZone_Vehicle_God) then{
-		fnc_usec_damageVehicle = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_damageHandlerVehicle.sqf";
-		vehicle_handleDamage = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\vehicle_handleDamage.sqf";
-		vehicle_handleKilled = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\vehicle_handleKilled.sqf";
-		_inVehicleLast removeAllEventHandlers "handleDamage";
-		_inVehicleLast addEventHandler ["handleDamage", {_this select 2}];
-		_inVehicleLast allowDamage true;
-		if ( AGN_safeZoneMessages ) then { systemChat ("[AGN] Cargod - OFF");};
+		if ((_playerVehicle isKindOf 'LandVehicle') || (_playerVehicle isKindOf 'Air') || (_playerVehicle isKindOf 'Ship')) then{
+			fnc_usec_damageVehicle = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_damageHandlerVehicle.sqf";
+			vehicle_handleDamage = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\vehicle_handleDamage.sqf";
+			vehicle_handleKilled = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\vehicle_handleKilled.sqf";
+			_inVehicleLast removeAllEventHandlers "handleDamage";
+			_inVehicleLast addEventHandler ["handleDamage", {_this select 2}];
+			_inVehicleLast allowDamage true;
+			if ( AGN_safeZoneMessages ) then { systemChat ("[AGN] Cargod - OFF");};
+		};
 	};
 
 

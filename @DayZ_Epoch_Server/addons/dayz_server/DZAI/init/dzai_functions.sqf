@@ -3,6 +3,7 @@
 	
 	Last Updated: 5:08 AM 12/24/2013
 */
+dzai_staticai = true;
 
 diag_log "[DZAI] Compiling DZAI functions.";
 

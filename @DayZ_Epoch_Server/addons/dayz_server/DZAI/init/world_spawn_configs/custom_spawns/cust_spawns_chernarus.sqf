@@ -24,7 +24,7 @@
 		600						//(OPTIONAL)* Respawn time. Number of seconds to wait until AI and vehicle are respawned. (Default: 600). Timer begins after AI group is wiped out or vehicle is destroyed, whichever comes first.
 	] call DZAI_spawn_vehicle;
 	
-	The above DZAI_spawn_vehicle call will spawn an Armored SUV with 1 driver, 3 passenger units and 1 gunner unit with military-grade weapons, and will respawn after 600 seconds (10 minutes).
+	The above DZAI_spawn_vehicle call will spawn an Armored SUV with 1 driver, 3 passenger units and 1 gunner unit with military-grade weapons, and will respawn after 600 seconds (3 minutes).
 
 	* Optional parameters may be left out of the function call. A default action will be taken instead.
 	
@@ -40,7 +40,149 @@
 */
 
 //----------------------------Add your custom spawn definitions below this line ----------------------------
+// Sector FNG
 
+[
+"DZAI_marker_sectorfng_front",
+4,
+3,
+false
+] call DZAI_spawn_units;
+
+[
+"DZAI_marker_sectorfng_sandl",
+4,
+3,
+false
+] call DZAI_spawn_units;
+
+[
+"DZAI_marker_sectorfng_sandr",
+4,
+3,
+false
+] call DZAI_spawn_units;
+
+[
+"DZAI_marker_sectorfng_roof",
+4,
+3,
+false
+] call DZAI_spawn_units;
+
+[
+"DZAI_marker_sectorfng_hang",
+4,
+3,
+false
+] call DZAI_spawn_units;
+
+[
+"DZAI_marker_sectorfng_back",
+4,
+2,
+false
+] call DZAI_spawn_units;
+
+[
+"DZAI_marker_sectorfng_crate1",
+4,
+3,
+false
+] call DZAI_spawn_units;
+
+[
+"DZAI_marker_sectorfng_crate2",
+4,
+2,
+false
+] call DZAI_spawn_units;
+
+[
+"DZAI_marker_sectorfng_crate3",
+4,
+3,
+false
+] call DZAI_spawn_units;
+
+[
+"DZAI_marker_sectorfng_crate4",
+3,
+2,
+false
+] call DZAI_spawn_units;
+
+[
+"DZAI_marker_sectorfng_crate5",
+3,
+3,
+false
+] call DZAI_spawn_units;
+
+// Golden Town
+[
+"DZAI_patrol_zone_s_1",
+5,
+3,
+false
+] call DZAI_spawn_units;
+
+[
+"DZAI_patrol_zone_s_2",
+5,
+3,
+false
+] call DZAI_spawn_units;
+
+[
+"DZAI_patrol_zone_s_3",
+3,
+3,
+false
+] call DZAI_spawn_units;
+
+[
+"DZAI_patrol_zone_s_4",
+5,
+3,
+false
+] call DZAI_spawn_units;
+
+[
+"DZAI_patrol_zone_s_5",
+3,
+3,
+false
+] call DZAI_spawn_units;
+
+//Mine
+[
+"DZAI_patrol_zone_m_1",
+3,
+3,
+false
+] call DZAI_spawn_units;
+
+[
+"DZAI_patrol_zone_m_2",
+3,
+3,
+false
+] call DZAI_spawn_units;
+
+[
+"DZAI_patrol_zone_m_3",
+3,
+3,
+false
+] call DZAI_spawn_units;
+
+[
+"DZAI_patrol_zone_m_4",
+3,
+3,
+false
+] call DZAI_spawn_units; 
 
 
 

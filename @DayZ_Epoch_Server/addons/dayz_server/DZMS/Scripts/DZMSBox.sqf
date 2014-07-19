@@ -116,13 +116,22 @@ if (_type == "supply") then {
 		_crate addMagazineCargoGlobal [_item,1];
 	};
 };
+if (_type == "build") then {
+	// load construction
+	_scount = count DZMSConSupply;
+	for "_x" from 0 to 50 do {
+		_sSelect = floor(random _sCount);
+		_item = DZMSConSupply select _sSelect;
+		_crate addMagazineCargoGlobal [_item,1];
+	};
+};
 
 ///////////////////////////////////////////////////////////////////
 // Epoch Money Crates
 if (_type == "money") then {
 	// load money
 	_scount = count _money;
-	for "_x" from 0 to 3 do {
+	for "_x" from 0 to 5 do {
 		_sSelect = floor(random _sCount);
 		_item = _money select _sSelect;
 		_crate addMagazineCargoGlobal [_item,1];

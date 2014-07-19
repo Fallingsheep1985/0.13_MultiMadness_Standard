@@ -193,7 +193,7 @@ DZAI_respawnTMinL = 600;
 DZAI_respawnTMaxL = 900;
 
 //Classnames of land vehicle types to use, with the maximum amount of each type to spawn. Default: [["UAZ_Unarmed_TK_EP1",1]]
-DZAI_vehList = [["UAZ_Unarmed_TK_EP1",2],["HMMWV_M1035_DES_EP1",2],["ArmoredSUV_PMC_DZE",1],["LandRover_CZ_EP1",2]["Offroad_DSHKM_Gue_DZE",3]];
+DZAI_vehList = [["UAZ_Unarmed_TK_EP1",2],["HMMWV_M1035_DES_EP1",2],["ArmoredSUV_PMC_DZE",1],["LandRover_CZ_EP1",2],["Offroad_DSHKM_Gue_DZE",3]];
 
 //Difficulty level of land vehicle patrol units. Difficulty level also affects unit loadout and loot. Possible values: 0 to 3 (Default: 3)
 DZAI_vehUnitLevel = 3;

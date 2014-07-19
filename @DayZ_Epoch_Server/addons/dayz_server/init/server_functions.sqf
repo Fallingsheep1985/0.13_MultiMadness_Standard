@@ -29,6 +29,9 @@ server_spawnAN2 = compile preprocessFileLineNumbers "\z\addons\dayz_server\compi
 server_carepackagedrop = compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_carepackagedrop.sqf";
 //Air Raid
 server_airRaid =            compile preprocessFileLineNumbers "z\addons\dayz_server\compile\server_airRaid.sqf";
+//Infected Camps
+spawnComposition = compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\object_mapper.sqf"; // Include BIS compositions
+fn_bases = compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\fn_bases.sqf"; // Infected Camps
 
 server_spawnEvents =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_spawnEvent.sqf";
 //server_weather =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_weather.sqf";
@@ -1089,13 +1092,13 @@ execVM "\z\addons\dayz_server\CustomBuildings\sectorfng\sectorfng_init.sqf";
 //IXXO
 execVM "\z\addons\dayz_server\CustomBuildings\balota.sqf";
 execVM "\z\addons\dayz_server\CustomBuildings\kamenka.sqf";
-execVM "\z\addons\dayz_server\CustomBuildings\Krasnostav.sqf";
-execVM "\z\addons\dayz_server\CustomBuildings\northeastairfield.sqf";
+execVM "\z\addons\dayz_server\CustomBuildings\Krasno.sqf";
+execVM "\z\addons\dayz_server\CustomBuildings\northeast.sqf";
 execVM "\z\addons\dayz_server\CustomBuildings\vybor.sqf";
-execVM "\z\addons\dayz_server\CustomBuildings\BorMilitaryBase.sqf";
-execVM "\z\addons\dayz_server\CustomBuildings\DichinaMilitaryBase.sqf";
-execVM "\z\addons\dayz_server\CustomBuildings\NovyLugMilitaryBase.sqf";
-execVM "\z\addons\dayz_server\CustomBuildings\Zelenogorsk.sqf";
+execVM "\z\addons\dayz_server\CustomBuildings\basebor.sqf";
+execVM "\z\addons\dayz_server\CustomBuildings\basedichina.sqf";
+execVM "\z\addons\dayz_server\CustomBuildings\basenovy.sqf";
+execVM "\z\addons\dayz_server\CustomBuildings\Zeleno.sqf";
 
 //Caves
 execVM "\z\addons\dayz_server\CustomBuildings\Prud_Cave.sqf";
@@ -1110,9 +1113,11 @@ execVM "\z\addons\dayz_server\CustomBuildings\box_la_grotte.sqf";
 //CDC Balota + Trader
 execVM "\z\addons\dayz_server\CustomBuildings\Trader_CDC_Balota.sqf";
 
-//Misc
+//Altar
 execVM "\z\addons\dayz_server\CustomBuildings\altar.sqf";
-execVM "\z\addons\dayz_server\CustomBuildings\golden_river.sqf";
+
+//Golden River MIne
+execVM "\z\addons\dayz_server\CustomBuildings\golden_river_mine.sqf";
 
 //cherno heliport
 execVM "\z\addons\dayz_server\CustomBuildings\heliport.sqf";
@@ -1122,18 +1127,11 @@ execVM "\z\addons\dayz_server\CustomBuildings\aircraftcarrier.sqf";
 
 //BANK
 execVM "\z\addons\dayz_server\CustomBuildings\banks\nbank_novy_sobor.sqf";
-// Bank Marker
-
-_marker1 = createMarker ["_marker2", [7018.75, 7655.4258]];
-_marker1 setMarkerText "Central Bank of Novy Sobor"; 
-_marker1 setMarkerType "dot";
-_marker1 setMarkerColor "ColorOrange";
-marker1 = _marker2;
-
 
 //East coast cherno
 execVM "\z\addons\dayz_server\CustomBuildings\Eastcoast.sqf";
 execVM "\z\addons\dayz_server\CustomBuildings\Eastcoast2.sqf";
+
 //Black Lake Castle
 execVM "\z\addons\dayz_server\CustomBuildings\blacklakecastle.sqf";
 
@@ -1142,3 +1140,13 @@ execVM "\z\addons\dayz_server\CustomBuildings\otmel.sqf";
 
 //road from dam to sector FNG
 execVM "\z\addons\dayz_server\CustomBuildings\roadpobeda.sqf";
+
+//Black forest outpost
+execVM "\z\addons\dayz_server\CustomBuildings\blackforestoutpost.sqf";
+
+//Electro
+execVM "\z\addons\dayz_server\CustomBuildings\electro.sqf";
+execVM "\z\addons\dayz_server\CustomBuildings\electroZI.sqf";
+
+//Cherno
+execVM "\z\addons\dayz_server\CustomBuildings\Cherno.sqf";

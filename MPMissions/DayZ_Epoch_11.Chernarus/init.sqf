@@ -44,6 +44,7 @@ dayz_maxAnimals = 5; // Default: 8
 dayz_tameDogs = true;
 DynamicVehicleDamageLow = 0; // Default: 0
 DynamicVehicleDamageHigh = 100; // Default: 100
+dayz_spawnInfectedSite_clutterCutter = 2; // Infected Base Settings / 0 =  loot hidden in grass // 1 = loot lifted // 2 = cluttercutter // 3 = debug
 
 DZE_BuildOnRoads = true; // Default: False
 DZE_requireplot = 1;
@@ -54,6 +55,7 @@ DZE_TRADER_SPAWNMODE = false;
 DZE_DeathMsgGlobal = true;
 DZE_DeathMsgTitleText = true;
 DZE_DeathMsgSide = true;
+DZE_BackpackGuard = false; //Default = true, true to enable, false to disable - wipes backpack on combat/ALT+F4 logging
 DZE_ForceNameTagsOff = false;
 DZE_R3F_WEIGHT = false; //use weight system
 DZE_PlotPole = [100,115];	
@@ -117,7 +119,7 @@ if (!isDedicated) then {
 	
 	//Run the player monitor
 	_id = player addEventHandler ["Respawn", {_id = [] spawn player_death;}];
-	_playerMonitor = 	 execVM "\z\addons\dayz_code\system\player_monitor.sqf";	
+	_playerMonitor = 	 execVM "\z\addons\dayz_code\system\player_monitor.sqf";
 	
 	if(VASPScript)then{
 		_nil =  execVM "scripts\VASP\VASP_init.sqf";
@@ -144,10 +146,6 @@ if(ServerWelcomeCreditsScript)then{
 if(RegenBloodScript)then{
 	//Regen Blood
 	 execVM "scripts\RegenBlood\regenblood.sqf";
-};
-if (AutoRefuelScript)then{
-	//Auto Refuel
-	 execVM 'scripts\AutoRefuel\kh_actions.sqf'; 
 };
 #include "\z\addons\dayz_code\system\REsec.sqf"
 
@@ -236,10 +234,24 @@ if(HeroPerkScript)then{
 if(WalkAmongstDeadScript)then{
 	call compile preprocessFileLineNumbers "scripts\walkamongstthedead\config.sqf";
 };
-
-
+if(ServicePointScript)then{
+	if (!isDedicated) then {
+		execVM "scripts\ServicePoints\service_point.sqf";
+	};
+};
+if(BaseJumpScript)then{
+	if (!isDedicated) then {
+		execVM "scripts\BaseJump\baseJump.sqf";
+	};
+};
 espawn = compile preprocessFileLineNumbers "scripts\spawn\spawn.sqf";
 waitUntil {!isNil "PVDZE_plr_LoginRecord"};
 if ((!isDedicated) && (dayzPlayerLogin2 select 2)) then {call espawn;};
+
+//Weapon Mods
+call compile preprocessFileLineNumbers "scripts\wmod\init.sqf";
+
+//Zombie Truck
+call compile preprocessFileLineNumbers "scripts\zombietruck\init.sqf";
 
 nul= execVM "scripts\KRON_Strings.sqf";

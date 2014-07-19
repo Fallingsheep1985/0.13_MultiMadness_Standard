@@ -7,8 +7,6 @@ AdminScript = true;
 SafezoneScripts = true;
 //DZGM (Group Management)
 DZGMScript = true;
-//Auto Refuel
-AutoRefuelScript = true;
 //Regen Blood
 RegenBloodScript = true;
 //Welcome credits
@@ -83,4 +81,10 @@ SuicideScript = true;
 DeployBikeScript = true;
 //Towing
 TowingScript = true;
+//Base Jump
+BaseJumpScript = true;
+//Service Points
+ServicePointScript = true;
+//NOS
+NOSScript = true;
 

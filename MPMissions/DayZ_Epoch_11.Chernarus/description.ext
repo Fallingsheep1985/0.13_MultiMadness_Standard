@@ -8,6 +8,9 @@ class RscIGUIShortcutButton;
 #include "scripts\journal\CfgPlayerStats\p_headshots.hpp"
 #include "scripts\journal\CfgPlayerStats\p_murders.hpp"
 
+//Infected Camps
+#include "scripts\InfectedCamps\CfgObjectCompositions.hpp"
+
 //Custom Loot
 #include "scripts\CustomLoot\CfgBuildingLoot.hpp"
 
@@ -407,7 +410,7 @@ class RscTitles {
 		class controls {
 			class zCamoIcon:RscPictureGUI {
 			idc = 1;
-			text="fixes\walkamongstthedead\zombie.paa";
+			text="custom\walkamongstthedead\zombie.paa";
 			x="0.958313 * safezoneW + safezoneX";
 			y="0.43 * safezoneH + safezoneY";
 			w=0.059999999;
@@ -555,13 +558,22 @@ class CfgSounds
 		sound[]={sounds\drink_water.ogg,1,1};
 		titles[] = {};
 	};
+	class nitro  {
+		 name="nitro";
+		 sound[]={sounds\nitro.ogg,0.9,1};
+		 titles[] = {};
+	};
+	class siren
+    {
+		name="siren";
+		sound[]={sounds\siren.ogg,0.9,1};
+		titles[] = {};
+	};
 };
 //DZGM
 #include "scripts\dzgm\groupManagement.hpp"
 // Epoch Admin Tools
 #include "admintools\dialog.hpp"
-//Right Click
-#include "scripts\RightClick\extra_rc.hpp"
 //ESS
 #include "scripts\spawn\defines.hpp"
 #include "scripts\spawn\class.hpp"

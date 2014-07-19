@@ -3,7 +3,5 @@
 //Thanks to OpenDayZ for there hard work in helping others.
 //Thanks to Sarge for his great AI work.
 
-
-[] execVM "\z\addons\dayz_server\CustomBuildings\sectorfng\marker.sqf"; //Comment out if you don't want a marker on the map
 [] execVM "\z\addons\dayz_server\CustomBuildings\sectorfng\crates.sqf"; //Comment out if you don't have weapon/vehicle crates enabled
 [] execVM "\z\addons\dayz_server\CustomBuildings\sectorfng\sectorfng.sqf"; //execs Sector FNG

@@ -2,9 +2,10 @@
 	DayZ Base Building
 	Made for DayZ Epoch please ask permission to use/edit/distrubute email vbawol@veteranbastards.com.
 */
-private ["_playerUID","_found","_location","_dir","_classname","_item","_hasrequireditem","_missing","_hastoolweapon","_cancel","_reason","_started","_finished","_animState","_isMedic","_dis","_sfx","_hasbuilditem","_tmpbuilt","_onLadder","_isWater","_require","_text","_offset","_IsNearPlot","_isOk","_location1","_location2","_counter","_limit","_proceed","_num_removed","_position","_object","_canBuildOnPlot","_friendlies","_nearestPole","_ownerID","_findNearestPoles","_findNearestPole","_distance","_classnametmp","_ghost","_isPole","_needText","_lockable","_zheightchanged","_rotate","_combination_1","_combination_2","_combination_3","_combination_4","_combination","_combination_1_Display","_combinationDisplay","_zheightdirection","_abort","_isNear","_need","_needNear","_vehicle","_inVehicle","_requireplot","_objHDiff","_isLandFireDZ","_isTankTrap"];
+private ["_helperColor","_objectHelper","_objectHelperDir","_objectHelperPos","_canDo",
+"_location","_dir","_classname","_item","_hasrequireditem","_missing","_hastoolweapon","_cancel","_reason","_started","_finished","_animState","_isMedic","_dis","_sfx","_hasbuilditem","_tmpbuilt","_onLadder","_isWater","_require","_text","_offset","_IsNearPlot","_isOk","_location1","_location2","_counter","_limit","_proceed","_num_removed","_position","_object","_canBuildOnPlot","_friendlies","_nearestPole","_ownerID","_findNearestPoles","_findNearestPole","_distance","_classnametmp","_ghost","_isPole","_needText","_lockable","_zheightchanged","_rotate","_combination_1","_combination_2","_combination_3","_combination_4","_combination","_combination_1_Display","_combinationDisplay","_zheightdirection","_abort","_isNear","_need","_needNear","_vehicle","_inVehicle","_requireplot","_objHDiff","_isLandFireDZ","_isTankTrap"];
 
-if(DZE_ActionInProgress) exitWith { cutText [(localize "str_epoch_player_40") , "PLAIN DOWN"]; };
+if(DZE_ActionInProgress) exitWith { cutText [(localize "str_epoch_player_40") , "PLAIN DOWN"];};
 DZE_ActionInProgress = true;
 
 // disallow building if too many objects are found within 30m
@@ -21,7 +22,6 @@ _inVehicle = (_vehicle != player);
 //snap
 helperDetach = false;
 _canDo = (!r_drag_sqf and !r_player_unconscious);
-DZE_F = false;
 
 DZE_Q = false;
 DZE_Z = false;
@@ -35,6 +35,7 @@ DZE_Z_ctrl = false;
 DZE_5 = false;
 DZE_4 = false;
 DZE_6 = false;
+DZE_F = false;
 
 DZE_cancelBuilding = false;
 
@@ -51,7 +52,6 @@ _found=[_playerUID,"AX"] call KRON_StrInStr;
 if (_found) then {
    _playerUID=[_playerUID] call KRON_convertPlayerUID;
 };
-
 _item =	_this;
 
 // Need Near Requirements
@@ -142,28 +142,28 @@ _findNearestPole = [];
 	if (alive _x) then {
 		_findNearestPole set [(count _findNearestPole),_x];
 	};
-} count _findNearestPoles;
+} foreach _findNearestPoles;
 
 _IsNearPlot = count (_findNearestPole);
 
-// If item is plot pole && another one exists within 45m
-if(_isPole && _IsNearPlot > 0) exitWith {  DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_44") , "PLAIN DOWN"]; };
+// If item is plot pole and another one exists within 45m
+if(_isPole and _IsNearPlot > 0) exitWith {  DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_44") , "PLAIN DOWN"];};
 
 if(_IsNearPlot == 0) then {
 
 	// Allow building of plot
-	if(_requireplot == 0 || _isLandFireDZ) then {
+	if(_requireplot == 0 or _isLandFireDZ) then {
 		_canBuildOnPlot = true;
 	};
 
 } else {
-	// Since there are plots nearby we check for ownership && then for friend status
+	// Since there are plots nearby we check for ownership and then for friend status
 
-	// check nearby plots ownership && then for friend status
+	// check nearby plots ownership and then for friend status
 	_nearestPole = _findNearestPole select 0;
 
 	// Find owner
-	_ownerID = _nearestPole getVariable ["CharacterID","0"];
+	_ownerID = _nearestPole getVariable["CharacterID","0"];
 
 	// diag_log format["DEBUG BUILDING: %1 = %2", dayz_characterID, _ownerID];
 
@@ -188,19 +188,19 @@ if(_IsNearPlot == 0) then {
 };
 
 // _message
-if(!_canBuildOnPlot) exitWith {  DZE_ActionInProgress = false; cutText [format[(localize "STR_EPOCH_PLAYER_135"),_needText,_distance] , "PLAIN DOWN"]; };
+if(!_canBuildOnPlot) exitWith {  DZE_ActionInProgress = false; cutText [format[(localize "STR_EPOCH_PLAYER_135"),_needText,_distance] , "PLAIN DOWN"];};
 
 _missing = "";
 _hasrequireditem = true;
 {
 	_hastoolweapon = _x in weapons player;
-	if(!_hastoolweapon) exitWith { _hasrequireditem = false; _missing = getText (configFile >> "cfgWeapons" >> _x >> "displayName"); };
-} count _require;
+	if(!_hastoolweapon) exitWith { _hasrequireditem = false; _missing = getText (configFile >> "cfgWeapons" >> _x >> "displayName"); }
+} forEach _require;
 
 _hasbuilditem = _this in magazines player;
-if (!_hasbuilditem) exitWith {DZE_ActionInProgress = false; cutText [format[(localize "str_player_31"),_text,"build"] , "PLAIN DOWN"]; };
+if (!_hasbuilditem) exitWith {DZE_ActionInProgress = false; cutText [format[(localize "str_player_31"),_text,"build"] , "PLAIN DOWN"];};
 
-if (!_hasrequireditem) exitWith {DZE_ActionInProgress = false; cutText [format[(localize "str_epoch_player_137"),_missing] , "PLAIN DOWN"]; };
+if (!_hasrequireditem) exitWith {DZE_ActionInProgress = false; cutText [format[(localize "str_epoch_player_137"),_missing] , "PLAIN DOWN"];};
 if (_hasrequireditem) then {
 
 	_location = [0,0,0];
@@ -222,11 +222,12 @@ if (_hasrequireditem) then {
 	_helperColor = "#(argb,8,8,3)color(0,0,0,0,ca)";
 	_objectHelper setobjecttexture [0,_helperColor];
 	_objectHelper attachTo [player,_offset];
-	_object attachTo [player,_offset];
+	_object attachTo [_objectHelper,[0,0,0]];
 
-	_position = getPosATL _object;
+	_position = getPosATL _objectHelper;
+	
 
-	cutText [(localize "str_epoch_player_45"), "PLAIN DOWN"];
+	//cutText [(localize "str_epoch_player_45"), "PLAIN DOWN"];
 
 	_objHDiff = 0;
 
@@ -237,6 +238,7 @@ if (isClass (missionConfigFile >> "SnapBuilding" >> _classname)) then {
 		["Init",_object,_classname,_objectHelper] spawn snap_build;
 	};
 };
+	
 	while {_isOk} do {
 
 		_zheightchanged = false;
@@ -327,7 +329,8 @@ if (isClass (missionConfigFile >> "SnapBuilding" >> _classname)) then {
 			if (!helperDetach) then {
 			detach _objectHelper;
 			};
-			
+
+
 			_position = getPosATL _objectHelper;
 
 			if(_zheightdirection == "up") then {
@@ -359,7 +362,7 @@ if (isClass (missionConfigFile >> "SnapBuilding" >> _classname)) then {
 
 			_objectHelper setDir (getDir _objectHelper);
 
-			if((_isAllowedUnderGround == 0) && ((_position select 2) < 0)) then {
+			if((_isAllowedUnderGround == 0) and ((_position select 2) < 0)) then {
 				_position set [2,0];
 			};
 
@@ -402,7 +405,7 @@ if (isClass (missionConfigFile >> "SnapBuilding" >> _classname)) then {
 		if(abs(_objHDiff) > 10) exitWith {
 			_isOk = false;
 			_cancel = true;
-			_reason = "Cannot move up || down more than 10 meters";
+			_reason = "Cannot move up or down more than 10 meters";
 			detach _object;
 			deleteVehicle _object;
 			detach _objectHelper;
@@ -450,7 +453,7 @@ if (isClass (missionConfigFile >> "SnapBuilding" >> _classname)) then {
 		// Get position based on object
 		_location = _position;
 
-		if((_isAllowedUnderGround == 0) && ((_location select 2) < 0)) then {
+		if((_isAllowedUnderGround == 0) and ((_location select 2) < 0)) then {
 			_location set [2,0];
 		};
 
@@ -495,11 +498,11 @@ if (isClass (missionConfigFile >> "SnapBuilding" >> _classname)) then {
 				if (_isMedic) then {
 					_started = true;
 				};
-				if (_started && !_isMedic) then {
+				if (_started and !_isMedic) then {
 					r_doLoop = false;
 					_finished = true;
 				};
-				if (r_interrupt || (player getVariable["combattimeout", 0] >= time)) then {
+				if (r_interrupt or (player getVariable["combattimeout", 0] >= time)) then {
 					r_doLoop = false;
 				};
 				if (DZE_cancelBuilding) exitWith {
@@ -601,7 +604,7 @@ if (isClass (missionConfigFile >> "SnapBuilding" >> _classname)) then {
 					if(_tmpbuilt isKindOf "Land_Fire_DZ") then {
 						_tmpbuilt spawn player_fireMonitor;
 					} else {
-						
+
 						//PVDZE_obj_Publish = [dayz_characterID,_tmpbuilt,[_dir,_location],_classname];
 						PVDZE_obj_Publish = [_playerUID,_tmpbuilt,[_dir,_location],_classname];
 						publicVariableServer "PVDZE_obj_Publish";

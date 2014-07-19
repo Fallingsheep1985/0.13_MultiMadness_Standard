@@ -27,7 +27,8 @@ vehicle_handleKilled = 				compile preprocessFileLineNumbers "scripts\ExplodedVe
 fnc_usec_selfActions =			compile preprocessFileLineNumbers "fixes\fn_selfActions.sqf";
 //ZombieBait/Bomb
 zombie_findTargetAgent =    compile preprocessFileLineNumbers "scripts\ZombieBait_Bomb_Shield\zombie_findTargetAgent.sqf";
-
+//Smelting fix
+player_craftItem =			compile preprocessFileLineNumbers "fixes\player_craftItem.sqf";
 //CANT TOW LOCKED VEHICLES
 local_lockUnlock = compile preprocessFileLineNumbers "scripts\Towing\local_lockUnlock.sqf";
 
@@ -43,14 +44,18 @@ local_lockUnlock = compile preprocessFileLineNumbers "scripts\Towing\local_lockU
 
 fnc_usec_damageActions = compile preprocessFileLineNumbers "fixes\fn_damageActions.sqf";
 player_updateGui = compile preprocessFileLineNumbers "fixes\player_updateGui.sqf";
-
+//Snap Build
 
 if (!isDedicated) then {
 	/* Use command menu instead of scroll menu? (default = false) */
 	DZE_SNAP_PRO_USE_COMMAND_MENU = false;
 
 	DZE_SNAP_BUILD_NUMKEYS = [0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B];
-	snap_build = compile preprocessFileLineNumbers "scripts\snap_pro\snap_build.sqf";
+
 	player_build = compile preprocessFileLineNumbers "fixes\player_build.sqf";
+	snap_build = compile preprocessFileLineNumbers "scripts\snap_pro\snap_build.sqf";
 	dayz_spaceInterrupt = compile preprocessFileLineNumbers "fixes\dayz_spaceInterrupt.sqf";
 };
+//Infected Camps
+infectedcamps = compile preprocessFileLineNumbers "scripts\InfectedCamps\object_infectedcamps.sqf";
+camp_spawnZombies = compile preprocessFileLineNumbers "scripts\InfectedCamps\camp_spawnZombies.sqf";

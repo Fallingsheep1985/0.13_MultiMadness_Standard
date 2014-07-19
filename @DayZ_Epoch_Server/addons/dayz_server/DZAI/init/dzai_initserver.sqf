@@ -7,7 +7,7 @@ private ["_startTime","_directoryAsArray"];
 
 if (!isServer || !isNil "DZAI_isActive") exitWith {};
 DZAI_isActive = true;
-
+DZAI_debugLevel = 0;
 _startTime = diag_tickTime;
 
 _directoryAsArray = toArray __FILE__;
